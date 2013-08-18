@@ -7,7 +7,7 @@ namespace EclipseCombatSimulation
 {
     class Ship
     {
-        List<Upgrade> m_upgrades;
+        List<Upgrade> m_upgrades = new List<Upgrade>();
 
         public enum ShipStatus
         {
@@ -149,6 +149,26 @@ namespace EclipseCombatSimulation
         public bool Destroyed()
         {
             return m_Damage > m_HullPoints;
+        }
+
+        public bool DetermineHit(int roll, int computer)
+        {
+            if (roll == 6)
+            {
+                return true;
+            }
+            else if (roll == 1)
+            {
+                return false;
+            }
+            else if (roll + computer - this.Shields >= 6)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 
